@@ -14,7 +14,7 @@ SELECT
 FROM product_category
     
 
---join table dengan main table
+--join table dengan main table menggunakan CTE
 with main as (
 select o.orderid, o.tanggal, o.customerid, o.prodnumber, o.quantity, cus.customeraddress, cus.customercity, 
 cus.customerstate, cus.customerzip, pr.prodname, pr.category, pr.price, pc.categoryname, pc.CategoryAbbreviation
@@ -26,7 +26,7 @@ from orders o
 select * from main
 
 
---table temp(membuat tabel sementara)
+--table temp (membuat tabel sementara)
 create temp table maintable
 (
 	orderid int, 
@@ -204,16 +204,6 @@ group by 1
 order by 2
 limit 5
 
--------------------------------------------------------
---masih dipikir2
---total revenue by state
-select customerstate, sum(quantity*price)
-from maintable
-group by 1
-order by 2 
-limit 5
-
-
 -------------------------------------------------------------
 --mencari rata2 penjualan tiap bulannya pada tahun 2020/2021
 select
@@ -242,10 +232,8 @@ GROUP BY 1
 
 select * from maintable
 
-
-
 --------------------tambahan-------------------
--- mencari total penjualan berdasarkan product (rakamin)
+-- mencari total penjualan berdasarkan product
 select prodname, 
 	   round(sum(price*quantity), 0) as TotalBayar
 from maintable
