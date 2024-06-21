@@ -14,16 +14,13 @@ SELECT
 FROM product_category
     
 
---join table dengan main table menggunakan CTE
-with main as (
+--join table dengan main table
 select o.orderid, o.tanggal, o.customerid, o.prodnumber, o.quantity, cus.customeraddress, cus.customercity, 
 cus.customerstate, cus.customerzip, pr.prodname, pr.category, pr.price, pc.categoryname, pc.CategoryAbbreviation
 from orders o
 	join customers cus on cus.custid=o.customerid
 	join product pr on pr.prodnumber=o.prodnumber
 	join product_category pc on pc.categoryid=pr.category
-)
-select * from main
 
 
 --table temp (membuat tabel sementara)
